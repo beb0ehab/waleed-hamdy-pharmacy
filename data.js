@@ -10,7 +10,10 @@ window.STORE = {
   freeDeliveryFrom: 300,    // توصيل مجاني فوق المبلغ ده (0 = إلغاء)
   minOrder: 50,             // أقل طلب
   workingHours: "يوميًا من 9 صباحًا حتى 2 بعد منتصف الليل",
-  areas: ["المنطقة 1", "المنطقة 2", "المنطقة 3", "أخرى"], // مناطق التوصيل
+  address: "1 شارع العريش، بجوار مترو ماركت — الهرم، الجيزة",
+  // لينك الموقع على الخريطة (لما الصيدلية تتضاف على جوجل مابس حط لينكها هنا)
+  mapUrl: "https://www.google.com/maps/search/?api=1&query=29.9957,31.1589",
+  areas: ["شارع العريش", "الطالبية", "الهرم", "فيصل", "أخرى"], // مناطق التوصيل
   logo: "" // رابط صورة اللوجو (اختياري) — لو فاضي هيظهر علامة صيدلية
 };
 
@@ -30,33 +33,46 @@ window.CATEGORIES = [
   { id: "family",  name: "تنظيم الأسرة",         icon: "❤️", bg: "#FDEDED" }
 ];
 
-/* المنتجات: الأسعار هنا أمثلة — غيّرها بأسعار الصيدلية
+/* المنتجات: الأسعار مأخوذة من أسعار صيدلية قريبة في الهرم على طلبات (نوفمبر 2026)
+   — راجعها مع الصيدلية قبل النشر.
    img: رابط صورة (اختياري) — لو فاضي هيظهر الإيموجي
    best: true = يظهر في "الأكثر طلبًا" */
 window.PRODUCTS = [
-  { id: 1,  cat: "meds",    name: "بانادول أدفانس 24 قرص",          price: 66,  icon: "💊", best: true },
-  { id: 2,  cat: "meds",    name: "كونجستال 20 قرص",                 price: 54,  icon: "💊", best: true },
-  { id: 3,  cat: "meds",    name: "أوجمنتين 1 جم 14 قرص",           price: 186, icon: "💊" },
-  { id: 4,  cat: "meds",    name: "أنتينال 24 كبسولة",              price: 48,  icon: "💊" },
-  { id: 5,  cat: "meds",    name: "فولتارين 50 مجم 20 قرص",         price: 72,  icon: "💊" },
-  { id: 6,  cat: "first",   name: "بلاستر جروح 20 قطعة",            price: 25,  icon: "🩹" },
-  { id: 7,  cat: "first",   name: "بيتادين محلول 120 مل",           price: 45,  icon: "🧪" },
-  { id: 8,  cat: "first",   name: "شاش معقم 10 قطع",                 price: 20,  icon: "🩹" },
-  { id: 9,  cat: "skin",    name: "سيرافي غسول مرطب 236 مل",        price: 720, icon: "🧴", best: true },
-  { id: 10, cat: "skin",    name: "واقي شمس SPF50",                  price: 450, icon: "☀️" },
-  { id: 11, cat: "vit",     name: "فيتامين سي 1000 فوار",           price: 85,  icon: "🍊", best: true },
-  { id: 12, cat: "vit",     name: "فيتامين د 50000 وحدة",           price: 60,  icon: "🌞" },
-  { id: 13, cat: "vit",     name: "أوميجا 3 — 30 كبسولة",           price: 210, icon: "🐟" },
-  { id: 14, cat: "fitness", name: "واي بروتين 2 كجم",                price: 3200,icon: "🥤" },
-  { id: 15, cat: "devices", name: "ترمومتر ديجيتال",                 price: 120, icon: "🌡️" },
-  { id: 16, cat: "devices", name: "جهاز قياس ضغط ديجيتال",          price: 1350,icon: "🩺" },
-  { id: 17, cat: "devices", name: "جهاز قياس سكر + 25 شريط",        price: 650, icon: "🩸" },
-  { id: 18, cat: "beauty",  name: "مرطب شفايف",                      price: 65,  icon: "💄" },
-  { id: 19, cat: "baby",    name: "بامبرز مقاس 4 — 44 حفاضة",       price: 390, icon: "👶", best: true },
-  { id: 20, cat: "baby",    name: "كريم حفاض 100 جم",               price: 95,  icon: "🍼" },
-  { id: 21, cat: "personal",name: "معجون أسنان 100 مل",             price: 55,  icon: "🪥" },
-  { id: 22, cat: "personal",name: "مزيل عرق رول",                    price: 110, icon: "🧴" },
-  { id: 23, cat: "eye",     name: "قطرة مرطبة للعين 10 مل",         price: 70,  icon: "👁️" },
-  { id: 24, cat: "women",   name: "فوط صحية 16 قطعة",               price: 60,  icon: "🌸" },
-  { id: 25, cat: "family",  name: "اختبار حمل",                      price: 35,  icon: "❤️" }
+  { id: 1,  cat: "meds",    name: "بانادول أدفانس 500 مجم — 48 قرص",      price: 92,   icon: "💊", best: true },
+  { id: 2,  cat: "meds",    name: "بانادول إكسترا — 48 قرص",              price: 116,  icon: "💊" },
+  { id: 3,  cat: "meds",    name: "بانادول كولد آند فلو — 24 قرص",        price: 76,   icon: "💊" },
+  { id: 4,  cat: "meds",    name: "كونجستال — 20 قرص",                    price: 50,   icon: "💊", best: true },
+  { id: 5,  cat: "meds",    name: "سيتال 500 مجم — 20 قرص",               price: 24,   icon: "💊" },
+  { id: 6,  cat: "meds",    name: "أنتينال 200 مجم — 24 كبسولة",          price: 52,   icon: "💊", best: true },
+  { id: 7,  cat: "meds",    name: "أوتريفين نقط أنف للكبار 10 مل",        price: 24,   icon: "👃" },
+  { id: 8,  cat: "meds",    name: "جافيسكون دبل أكشن شراب 150 مل",       price: 144,  icon: "🧴" },
+  { id: 9,  cat: "meds",    name: "كونترولوك 20 مجم — 14 قرص",            price: 100,  icon: "💊" },
+  { id: 10, cat: "meds",    name: "برونشيكم شراب للكحة 100 مل",           price: 99,   icon: "🍯" },
+  { id: 11, cat: "first",   name: "بيتادين محلول مطهر 120 مل",            price: 95,   icon: "🧪" },
+  { id: 12, cat: "first",   name: "ميبو مرهم للحروق 15 جم",               price: 109,  icon: "🩹" },
+  { id: 13, cat: "first",   name: "ريباريل جل للكدمات 40 جم",             price: 58,   icon: "🩹" },
+  { id: 14, cat: "skin",    name: "غسول نيتروجينا ديب كلين 200 مل",       price: 283.5,icon: "🧴" },
+  { id: 15, cat: "skin",    name: "غسول ستارفيل للبشرة الدهنية 200 مل",   price: 140,  icon: "🧴" },
+  { id: 16, cat: "skin",    name: "واقي شمس فاكيشن SPF50+ — 60 مل",       price: 350,  icon: "☀️", best: true },
+  { id: 17, cat: "skin",    name: "إيفا صن آند سي واقي للوجه SPF50 — 40 مل", price: 180, icon: "☀️" },
+  { id: 18, cat: "vit",     name: "فيتاسيد سي 1 جم فوار — 12 قرص",        price: 54,   icon: "🍊", best: true },
+  { id: 19, cat: "vit",     name: "أوسوفورتين د3 5000 وحدة — 30 قرص",     price: 130,  icon: "🌞" },
+  { id: 20, cat: "vit",     name: "سنتروم للكبار — 30 قرص",               price: 275,  icon: "💊" },
+  { id: 21, cat: "vit",     name: "ليمتلس باور ماكس — 30 قرص",            price: 310,  icon: "⚡" },
+  { id: 22, cat: "devices", name: "ترمومتر ديجيتال Planet Health",        price: 200,  icon: "🌡️" },
+  { id: 23, cat: "devices", name: "جهاز ضغط Planet Health PH 330",        price: 1200, icon: "🩺" },
+  { id: 24, cat: "devices", name: "شرائط أكيو تشيك أكتيف — 50 شريط",     price: 605,  icon: "🩸" },
+  { id: 25, cat: "baby",    name: "بامبرز بيبي دراي مقاس 4 — 58 حفاضة",   price: 479,  icon: "👶", best: true },
+  { id: 26, cat: "baby",    name: "مولفكس مقاس 4 جامبو — 58 حفاضة",      price: 470,  icon: "👶" },
+  { id: 27, cat: "baby",    name: "بامبرز نيو بورن مقاس 1 — 60 حفاضة",   price: 369,  icon: "🍼" },
+  { id: 28, cat: "personal",name: "معجون سيجنال تبييض 100 مل",            price: 80,   icon: "🪥" },
+  { id: 29, cat: "personal",name: "فرشاة سيجنال تريبل كلين — 2 قطعة",     price: 60,   icon: "🪥" },
+  { id: 30, cat: "personal",name: "ليسترين جرين تي غسول فم 250 مل",       price: 150,  icon: "🫧" },
+  { id: 31, cat: "eye",     name: "بريزولين قطرة عين وأنف 15 مل",         price: 23,   icon: "👁️" },
+  { id: 32, cat: "women",   name: "مولبد ألترا ثين طويل — 16 فوطة",       price: 105,  icon: "🌸" },
+  { id: 33, cat: "women",   name: "كيرفري فوط يومية — 20 قطعة",           price: 100,  icon: "🌸" },
+  { id: 34, cat: "women",   name: "فوليك أسيد 5 مجم — 30 قرص",            price: 36,   icon: "💊" },
+  { id: 35, cat: "family",  name: "اختبار حمل فالافاست",                  price: 130,  icon: "❤️" },
+  { id: 36, cat: "fitness", name: "إل كارنيتين 300 مجم شراب 30 مل",       price: 70,   icon: "💪" },
+  { id: 37, cat: "beauty",  name: "إيفا غسول ومزيل مكياج 150 مل",         price: 70,   icon: "💄" }
 ];

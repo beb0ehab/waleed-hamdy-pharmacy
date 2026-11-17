@@ -259,7 +259,7 @@
       if (best.length) html += `<h2>🔥 الأكثر طلبًا</h2><div class="row">${best.map(card).join("")}</div>`;
       html += `<h2>كل المنتجات</h2><div class="grid">${P.map(card).join("")}</div>`;
       html += askBox("مش لاقي الدواء اللي محتاجه؟");
-      html += `<div class="info">🚚 التوصيل ${S.deliveryFee ? fmt(S.deliveryFee) : "مجاني"}${S.freeDeliveryFrom ? ` · مجاني للطلبات فوق ${fmt(S.freeDeliveryFrom)}` : ""}<br>💵 الدفع كاش عند الاستلام أو محفظة إلكترونية<br>⚠️ الأسعار قابلة للتغيير حسب التوفر</div>`;
+      html += `<div class="info">🚚 التوصيل ${S.deliveryFee ? fmt(S.deliveryFee) : "مجاني"}${S.freeDeliveryFrom ? ` · مجاني للطلبات فوق ${fmt(S.freeDeliveryFrom)}` : ""}<br>💵 الدفع كاش عند الاستلام أو محفظة إلكترونية<br>⚠️ الأسعار قابلة للتغيير حسب التوفر${S.address ? `<br>📍 ${S.mapUrl ? `<a href="${esc(S.mapUrl)}" target="_blank" rel="noopener" style="color:var(--brand);font-weight:700">${esc(S.address)}</a>` : esc(S.address)}` : ""}</div>`;
     }
     m.innerHTML = html;
     renderBar();
